@@ -1,7 +1,7 @@
 package com.jaironamorim.datasimulator4devs.controller;
 
 import com.jaironamorim.datasimulator4devs.model.dto.creditcard.CreditCardDto;
-import com.jaironamorim.datasimulator4devs.service.CreditCardGenarateService;
+import com.jaironamorim.datasimulator4devs.service.CreditCardGenaratorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/credit-card")
 public class CreditCardGeneratorController {
 
-    private final CreditCardGenarateService creditCardGenarateService;
+    private final CreditCardGenaratorService creditCardGenarateService;
+
 
     @GetMapping("/generate/{label}")
     public ResponseEntity<CreditCardDto> generateCreditCard( @PathVariable(value = "label") String label,
@@ -19,7 +20,6 @@ public class CreditCardGeneratorController {
                                                              String checkdigit) {
 
         CreditCardDto creditCardDto = creditCardGenarateService.generateCreditCard(label, checkdigit);
-
         return ResponseEntity.ok().body(creditCardDto);
 
     }
@@ -28,7 +28,6 @@ public class CreditCardGeneratorController {
     public ResponseEntity<Boolean> validateCard(@RequestParam(value = "numberOfCard") String numberOfCard){
 
         Boolean isvalid = creditCardGenarateService.isValidCreditCardNumber(numberOfCard);
-
         return ResponseEntity.ok().body(isvalid);
 
     }

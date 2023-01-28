@@ -2,16 +2,21 @@ package com.jaironamorim.datasimulator4devs.service.impl;
 
 import com.jaironamorim.datasimulator4devs.model.dto.document.CNPJDto;
 import com.jaironamorim.datasimulator4devs.service.CNPJGeneratorService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class CNPJGeneratorServiceImpl implements CNPJGeneratorService {
 
     @Override
     public CNPJDto startGenerateCNPJ(){
 
+        log.info("Gerando CNPJ");
         final String cnpj = this.generateCNPJ();
 
         return CNPJDto.builder()

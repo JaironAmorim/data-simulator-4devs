@@ -2,7 +2,7 @@ package com.jaironamorim.datasimulator4devs.service.impl;
 
 import com.jaironamorim.datasimulator4devs.model.dto.creditcard.CreditCardDto;
 import com.jaironamorim.datasimulator4devs.model.enums.LabelEnum;
-import com.jaironamorim.datasimulator4devs.service.CreditCardGenarateService;
+import com.jaironamorim.datasimulator4devs.service.CreditCardGenaratorService;
 import com.jaironamorim.datasimulator4devs.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,13 +18,15 @@ import java.util.Random;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class CreditCardGenarateServiceImpl implements CreditCardGenarateService {
+public class CreditCardGenaratorServiceImpl implements CreditCardGenaratorService {
 
     @Override
     public CreditCardDto generateCreditCard(String label, String checkdigit) {
 
+        log.info("Gerando numero de Cartão");
         String number;
-        LabelEnum labelEnum = LabelEnum.getLabel(label);
+
+        LabelEnum labelEnum = Objects.isNull(label) ? LabelEnum.VISA : LabelEnum.getLabel(label);
         List<String> prefixList = LabelEnum.getPrefixList(labelEnum);
 
         if(Objects.isNull(checkdigit)){

@@ -2,15 +2,19 @@ package com.jaironamorim.datasimulator4devs.service.impl;
 
 import com.jaironamorim.datasimulator4devs.model.dto.document.CPFDto;
 import com.jaironamorim.datasimulator4devs.service.CPFGeneratorService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
-
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class CPFGeneratorServiceImpl implements CPFGeneratorService {
     @Override
     public CPFDto startGenerateCPF(){
 
+        log.info("Gerando cpf");
         final String cpf = this.generateCPF();
 
         return CPFDto.builder()
